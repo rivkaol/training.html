@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>חירות אמיתית במטבח | רבקה הולצברג</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1B4D3E',      
+                        accent: '#D4AF37',       
+                        rose: '#D68C85',         
+                        bgCream: '#FDFBF7',      
+                    },
+                    fontFamily: { sans: ['Rubik', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body {
+            max-width: 100%; overflow-x: hidden;
+            background-color: #FDFBF7; color: #333;
+            scroll-behavior: smooth; touch-action: manipulation;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 20px 50px rgba(27, 77, 62, 0.05);
+        }
+        .custom-input {
+            transition: all 0.2s ease; border: 1.5px solid #E2E8F0;
+            background: #fff !important; padding: 1rem; border-radius: 1rem;
+            width: 100%; font-size: 1.1rem;
+        }
+        .custom-input:focus { outline: none; border-color: #D4AF37; box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1); }
+        .required-star { color: #ef4444; margin-right: 0.25rem; font-weight: bold; }
+        .hp-field { display: none !important; opacity: 0; position: absolute; }
+        .btn-premium {
+            background: linear-gradient(135deg, #D4AF37 0%, #C5A028 100%);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #1B4D3E 0%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased text-[18px] md:text-[21px]">
+
+    <div class="bg-primary text-white text-center py-3 px-4 text-sm md:text-base font-medium sticky top-0 z-50">
+        מכירה מוקדמת לפסח 2024: מחיר השקה מיוחד לזמן מוגבל!
+    </div>
+
+    <header class="relative pt-12 pb-20 md:pt-20 md:pb-28 px-6 bg-gradient-to-b from-white to-[#FDFBF7]">
+        <div class="max-w-5xl mx-auto text-center">
+            
+            <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-gray-100 text-primary font-bold text-sm md:text-base mb-8 shadow-sm">
+                <i data-lucide="unlock" class="w-4 h-4 text-accent"></i>
+                המדריך שישחרר אותך מהכבדות של החג
+            </div>
+
+            <h1 class="text-4xl md:text-7xl font-black text-primary mb-6 leading-[1.1] tracking-tight">
+                להנות מפסח <span class="text-accent">בלי להרגיש "בלון"</span> <br> 
+                ובלי לוותר על הביס המושלם
+            </h1>
+
+            <p class="text-lg md:text-2xl text-gray-600 mb-12 font-light max-w-3xl mx-auto leading-relaxed">
+                דמייני שולחן חג מפואר, עוגות נימוחות וקניידלך אווריריים – כולם <span class="font-bold text-primary">ללא גלוטן וללא סוכר</span>. כן, זה אפשרי, זה בריא, וזה הולך להיות הפסח הכי טעים שהיה לך אי פעם.
+            </p>
+
+            <div class="max-w-lg mx-auto glass-card p-8 md:p-10 rounded-[40px] text-right shadow-2xl border-t-8 border-accent relative">
+                <div class="absolute -top-6 -left-6 bg-rose text-white px-4 py-2 rounded-xl rotate-[-10deg] font-bold shadow-lg hidden md:block">
+                    גישה מיידית!
+                </div>
+                <h3 class="text-2xl font-black text-center mb-6 text-primary">שרייני לעצמך פסח קליל</h3>
+                <form class="lead-form space-y-4" id="mainForm" onsubmit="handleForm(event)">
+                    <div class="hp-field"><input type="text" name="hp_confirm"></div>
+                    
+                    <div class="space-y-1">
+                        <label class="block text-sm font-bold pr-1 text-gray-700">שם מלא</label>
+                        <input type="text" name="fullName" class="custom-input" placeholder="איך קוראים לך?" required>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="block text-sm font-bold pr-1 text-gray-700">כתובת מייל למשלוח המדריך</label>
+                        <input type="email" name="email" class="custom-input text-left" dir="ltr" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="block text-sm font-bold pr-1 text-gray-700">טלפון נייד</label>
+                        <input type="tel" name="phone" class="custom-input text-left" dir="ltr" placeholder="050-0000000" required>
+                    </div>
+
+                    <button type="submit" class="btn-premium w-full py-5 text-white font-black rounded-2xl text-2xl mt-4 shadow-xl">
+                        אני רוצה את המדריך עכשיו!
+                    </button>
+                    <p class="text-center text-gray-500 text-sm mt-2">השקעה של 37₪ בלבד (במקום 97₪)</p>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-20 bg-white border-y border-gray-50">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl md:text-5xl font-black text-center mb-12 text-primary">נמאס לך להגיע לסוף החג בתחושת אשמה?</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="flex items-start gap-4 p-6 rounded-3xl bg-red-50/50 border border-red-100">
+                    <i data-lucide="frown" class="text-red-400 w-8 h-8 shrink-0"></i>
+                    <p class="text-gray-700">מרגישה עייפה וכבדה אחרי כל ארוחה? המצות והסוכר גורמים לך לנפיחות וחוסר נוחות?</p>
+                </div>
+                <div class="flex items-start gap-4 p-6 rounded-3xl bg-red-50/50 border border-red-100">
+                    <i data-lucide="search" class="text-red-400 w-8 h-8 shrink-0"></i>
+                    <p class="text-gray-700">מחפשת מתכונים בריאים אבל הכל יוצא יבש, מסובך או פשוט לא טעים?</p>
+                </div>
+                <div class="flex items-start gap-4 p-6 rounded-3xl bg-red-50/50 border border-red-100">
+                    <i data-lucide="trending-up" class="text-red-400 w-8 h-8 shrink-0"></i>
+                    <p class="text-gray-700">מפחדת שכל העבודה הקשה שלך על המשקל והבריאות תרד לטמיון בשבוע אחד?</p>
+                </div>
+                <div class="flex items-start gap-4 p-6 rounded-3xl bg-red-50/50 border border-red-100">
+                    <i data-lucide="x-circle" class="text-red-400 w-8 h-8 shrink-0"></i>
+                    <p class="text-gray-700">נאלצת לוותר על הקינוח בזמן שכולם נהנים, רק כי אין אופציה בריאה באמת?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- הלב של המדריך - הערך המוסף -->
+    <section class="py-24 px-6 bg-[#FDFBF7] relative">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-black text-primary mb-4">השנה הכל הולך להשתנות</h2>
+                <p class="text-xl text-gray-600">יצרתי עבורך פתרון קולינרי מלא, מא' ועד ת'</p>
+            </div>
+
+            <div class="space-y-12">
+                <div class="flex flex-col md:flex-row gap-8 items-center glass-card p-8 rounded-[40px]">
+                    <div class="w-full md:w-1/3 aspect-square bg-bgCream rounded-3xl flex items-center justify-center shadow-inner">
+                        <i data-lucide="sparkles" class="w-20 h-20 text-accent"></i>
+                    </div>
+                    <div class="w-full md:w-2/3 text-right">
+                        <h3 class="text-3xl font-black text-primary mb-4">המרות הקסם של רבקה</h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            הסוד של המדריך הוא לא רק המתכונים, אלא היכולת שלך להפוך כל מתכון רגיל לבריא. 
+                            תקבלי טבלאות המרה מדויקות לממתיקים טבעיים, קמחים ללא גלוטן ומידות – כך שתוכלי לאפות בביטחון מלא.
+                        </p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center gap-2 text-primary font-bold"><i data-lucide="check-circle" class="w-5 h-5 text-accent"></i> איך להחליף סוכר בלי לאבד את המרקם</li>
+                            <li class="flex items-center gap-2 text-primary font-bold"><i data-lucide="check-circle" class="w-5 h-5 text-accent"></i> שילוב קמחים מושלם למאפים שלא מתפרקים</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                            <i data-lucide="chef-hat" class="text-primary w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-primary mb-4">מעל 30 מתכוני פרימיום</h4>
+                        <p class="text-gray-600">מראשונות ועד קינוחים. מתכונים שנבדקו שוב ושוב עד שהגיעו לרמה של מסעדת יוקרה – רק בגרסה הבריאה.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                            <i data-lucide="shopping-cart" class="text-primary w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-primary mb-4">רשימת קניות חכמה</h4>
+                        <p class="text-gray-600">בלי להתרוצץ בין 10 חנויות טבע. רשימה מרוכזת של חומרי הגלם שבאמת צריך כדי להפוך את המטבח לבריא.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- סקציית "למי זה מתאים" לחיזוק ההמרה -->
+    <section class="py-20 px-6 bg-primary text-white overflow-hidden relative">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-5xl font-black mb-12">האם המדריך הזה הוא בשבילך?</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="p-6 border border-white/20 rounded-2xl bg-white/5">
+                    <h5 class="font-bold text-accent mb-2">לשומרות המשקל</h5>
+                    <p class="text-sm">מי שרוצה לעבור את החג בלי לעלות גרם, תוך שהיא אוכלת ושבעה.</p>
+                </div>
+                <div class="p-6 border border-white/20 rounded-2xl bg-white/5">
+                    <h5 class="font-bold text-accent mb-2">לסוכרתיות ונמנעות מסוכר</h5>
+                    <p class="text-sm">מתכונים עם אינדקס גליקמי נמוך שמאפשרים להנות בלי לקפוץ בערכים.</p>
+                </div>
+                <div class="p-6 border border-white/20 rounded-2xl bg-white/5">
+                    <h5 class="font-bold text-accent mb-2">לאמהות ומארחות</h5>
+                    <p class="text-sm">מי שרוצה להגיש למשפחה אוכל מזין באמת, כזה שכולם יבקשו ממנו עוד.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-16">
+            <div class="relative">
+                <div class="w-72 h-72 rounded-full border-[12px] border-[#FDFBF7] shadow-2xl overflow-hidden shrink-0 relative z-10">
+                    <img src="https://raw.githubusercontent.com/rivkaol/quiet-gut/main/profile.jpg.jpg" alt="רבקה הולצברג" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-accent rounded-full -z-0 opacity-20 blur-2xl"></div>
+            </div>
+            <div class="text-center md:text-right">
+                <h2 class="text-4xl font-black text-primary mb-6 underline decoration-accent/30 underline-offset-8">החזון שלי לפסח שלך</h2>
+                <p class="text-xl md:text-2xl text-gray-700 leading-relaxed font-light italic">
+                    "אני מאמינה שבריאות היא לא עונש, ופסח הוא לא זמן לסבול. אחרי שנים של מחקר במטבח הבריא, ריכזתי עבורך את כל הקיצורי דרך והסודות שלי. המטרה שלי היא שתקומי בבוקר שאחרי החג בתחושה של ניצחון – גם נהנית, גם שבעת וגם שמרת על הגוף שלך."
+                </p>
+                <div class="mt-8">
+                    <p class="text-2xl font-bold text-primary">רבקה הולצברג</p>
+                    <p class="text-gray-500">מומחית לתזונה בריאה וקולינריה ללא גלוטן</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-bgCream">
+        <div class="max-w-2xl mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-6xl font-black mb-8 text-primary">מוכנה לחירות אמיתית?</h2>
+            <p class="text-xl text-gray-600 mb-12 italic">המחיר המיוחד (37₪) תקף ל-100 הרוכשות הראשונות בלבד</p>
+            
+            <div class="bg-white rounded-[50px] p-10 md:p-14 text-right shadow-2xl border border-gray-100">
+                <form class="lead-form space-y-5" onsubmit="handleForm(event)">
+                    <div class="hp-field"><input type="text" name="hp_confirm"></div>
+                    
+                    <div class="space-y-1">
+                        <label class="block text-sm font-bold pr-1 text-primary">שם מלא</label>
+                        <input type="text" name="fullName" class="custom-input text-gray-800" required>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-sm font-bold pr-1 text-primary">אימייל לקבלת המדריך</label>
+                        <input type="email" name="email" class="custom-input text-gray-800 text-left" dir="ltr" required>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-sm font-bold pr-1 text-primary">טלפון</label>
+                        <input type="tel" name="phone" class="custom-input text-gray-800 text-left" dir="ltr" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-premium w-full py-6 text-white font-black rounded-2xl text-2xl mt-8">
+                        אני רוצה את המדריך (37₪)
+                    </button>
+                    <div class="flex items-center justify-center gap-4 mt-6">
+                        <div class="flex items-center gap-1 text-xs text-gray-400">
+                            <i data-lucide="shield-check" class="w-4 h-4"></i> תשלום מאובטח
+                        </div>
+                        <div class="flex items-center gap-1 text-xs text-gray-400">
+                            <i data-lucide="zap" class="w-4 h-4"></i> גישה מיידית
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-white text-center border-t border-gray-50">
+        <p class="text-gray-400 text-sm mb-6">&copy; 2024 רבקה הולצברג - כל הזכויות שמורות</p>
+        <script src="https://rivkaol.github.io/legal-footer.js"></script>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const MAKE_WEBHOOK_URL = "https://hook.eu2.make.com/cln0n5rlb9kxk6bi7qy5oqk7w3di2gur";
+        const PAYMENT_URL = "https://pay.sumit.co.il/p/your-link-here"; // יש להחליף בלינק תשלום אמיתי
+        const TRAINING_ID = "Passover_Guide_2024_Premium";
+
+        async function handleForm(e) {
+            e.preventDefault();
+            const form = e.target;
+            
+            if(form.hp_confirm && form.hp_confirm.value !== "") return; 
+
+            const btn = form.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "מעבירה אותך לתשלום...";
+            btn.disabled = true;
+
+            const data = {
+                fullName: form.fullName.value,
+                email: form.email.value,
+                phone: form.phone.value,
+                id: TRAINING_ID,
+                source: "Landing_Page_V2",
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                // שולחים לוובהוק וממשיכים לתשלום ללא קשר לתגובה כדי לא לעכב את הלקוחה
+                fetch(MAKE_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
+                });
+                
+                setTimeout(() => {
+                    window.location.href = PAYMENT_URL;
+                }, 800);
+
+            } catch (err) {
+                window.location.href = PAYMENT_URL;
+            }
+        }
+    </script>
+</body>
+</html>
