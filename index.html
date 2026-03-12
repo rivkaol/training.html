@@ -15,9 +15,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1B4D3E',      /* ירוק מותג עמוק */
-                        accent: '#D4AF37',       /* זהב יוקרתי */
-                        bgCream: '#FDFBF7',      /* שמנת נקייה */
+                        primary: '#1B4D3E',
+                        accent: '#D4AF37',
+                        bgCream: '#FDFBF7',
                     },
                     fontFamily: { sans: ['Rubik', 'sans-serif'] }
                 }
@@ -26,68 +26,52 @@
     </script>
 
     <style>
-        /* מניעת תזוזות ו"ריקוד" בנייד */
         html, body {
-            max-width: 100%;
-            overflow-x: hidden;
-            background-color: #FDFBF7;
-            color: #333;
-            scroll-behavior: smooth;
-            touch-action: manipulation;
+            max-width: 100%; overflow-x: hidden;
+            background-color: #FDFBF7; color: #333;
+            scroll-behavior: smooth; touch-action: manipulation;
         }
-
         .glass-card {
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.7);
             box-shadow: 0 20px 50px rgba(27, 77, 62, 0.05);
         }
-
+        /* עיצוב משופר לשדות הקלט */
         .custom-input {
             transition: all 0.2s ease;
             border: 1.5px solid #E2E8F0;
             background: #fff !important;
+            padding: 1rem 1.25rem; /* py-4 px-5 */
+            font-size: 1.125rem; /* text-lg */
+            border-radius: 1rem; /* rounded-2xl */
         }
-
         .custom-input:focus {
             outline: none;
             border-color: #D4AF37;
             box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
         }
-
-        .custom-input.error {
-            border-color: #ef4444;
-            background-color: #fffafb !important;
-        }
-
-        /* Honeypot field (Anti-spam) */
+        .custom-input.error { border-color: #ef4444; background-color: #fffafb !important; }
         .hp-field { display: none !important; opacity: 0; position: absolute; }
-
-        /* Loader */
-        #loader {
-            position: fixed; inset: 0; background: #fff; z-index: 100;
-            display: flex; align-items: center; justify-content: center;
-        }
-        
+        #loader { position: fixed; inset: 0; background: #fff; z-index: 100; display: flex; align-items: center; justify-content: center; }
         .main-content { opacity: 0; transition: opacity 0.8s ease; }
         .is-loaded .main-content { opacity: 1; }
-
         .btn-premium {
             background: linear-gradient(135deg, #D4AF37 0%, #C5A028 100%);
             box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        /* צבע משני שמשתנה מהטבלה */
         :root { --secondary-color: #D68C85; }
+        
+        /* עיצוב לכוכבית חובה */
+        .required-star { color: #ef4444; margin-right: 0.25rem; font-weight: bold; }
     </style>
 </head>
-<body class="antialiased text-[22px] md:text-[24px]">
+<body class="antialiased text-[20px] md:text-[22px] leading-relaxed">
 
     <div id="loader">
         <div class="flex flex-col items-center gap-4">
             <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-primary"></div>
-            <p class="text-primary font-medium text-lg">מעדכנת פרטים מהטבלה...</p>
+            <p class="text-primary font-medium text-lg">טוען את התוכן הדינמי...</p>
         </div>
     </div>
 
@@ -98,22 +82,36 @@
                 
                 <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-gray-100 text-primary font-bold text-base md:text-lg mb-10 shadow-sm">
                     <i data-lucide="sparkles" class="w-5 h-5 text-accent"></i>
-                    הדרכת עומק מרתקת בשידור חי
+                    <span id="tagline-text">...</span>
                 </div>
 
-                <h1 id="training-name" class="text-5xl md:text-8xl font-black text-primary mb-8 leading-[1.1] tracking-tight">...</h1>
+                <h1 id="hero-headline" class="text-5xl md:text-8xl font-black text-primary mb-8 leading-[1.1] tracking-tight">...</h1>
 
-                <p id="training-date-hero" class="text-2xl md:text-4xl text-gray-500 mb-16 font-light max-w-3xl mx-auto leading-relaxed">...</p>
+                <p id="hero-subtitle" class="text-2xl md:text-3xl text-gray-500 mb-16 font-light max-w-4xl mx-auto leading-relaxed">...</p>
 
                 <div class="max-w-xl mx-auto">
-                    <div class="glass-card p-10 md:p-14 rounded-[45px] text-right">
-                        <h3 class="text-3xl font-bold text-center mb-10 text-primary">שמרי לי מקום בהדרכה</h3>
-                        <form class="dynamic-form space-y-6" onsubmit="processForm(event)">
+                    <div class="glass-card p-10 md:p-12 rounded-[40px] text-right">
+                        <h3 id="form-title-1" class="text-3xl font-bold text-center mb-10 text-primary">...</h3>
+                        
+                        <form class="dynamic-form space-y-5" onsubmit="processForm(event)">
                             <div class="hp-field"><input type="text" name="hp_confirm"></div>
-                            <input type="text" name="fullName" class="custom-input w-full px-6 py-5 rounded-2xl text-xl" placeholder="שם מלא (לפחות 2 אותיות)" required>
-                            <input type="email" name="email" class="custom-input w-full px-6 py-5 rounded-2xl text-xl text-left" dir="ltr" placeholder="דואר אלקטרוני" required>
-                            <input type="tel" name="phone" class="custom-input w-full px-6 py-5 rounded-2xl text-xl text-left" dir="ltr" placeholder="טלפון (כולל חו״ל)" required>
-                            <button type="submit" class="btn-premium w-full py-6 text-white font-black rounded-[20px] text-2xl mt-6">שרייני לי מקום עכשיו</button>
+                            
+                            <div class="space-y-1.5">
+                                <label class="block text-base font-medium text-primary pr-1">שם מלא<span class="required-star">*</span></label>
+                                <input type="text" name="fullName" class="custom-input w-full rounded-xl" placeholder="ישראל ישראלי" required>
+                            </div>
+
+                            <div class="space-y-1.5">
+                                <label class="block text-base font-medium text-primary pr-1">דואר אלקטרוני<span class="required-star">*</span></label>
+                                <input type="email" name="email" class="custom-input w-full rounded-xl text-left" dir="ltr" placeholder="your@email.com" required>
+                            </div>
+
+                            <div class="space-y-1.5">
+                                <label class="block text-base font-medium text-primary pr-1">טלפון (כולל קידומת לחו"ל במידת הצורך)<span class="required-star">*</span></label>
+                                <input type="tel" name="phone" class="custom-input w-full rounded-xl text-left" dir="ltr" placeholder="050-1234567" required>
+                            </div>
+
+                            <button id="submit-btn-1" type="submit" class="btn-premium w-full py-5 text-white font-black rounded-xl text-2xl mt-6">...</button>
                         </form>
                     </div>
                 </div>
@@ -124,31 +122,41 @@
             <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
                 <div class="glass-card p-12 rounded-[40px] text-center">
                     <i data-lucide="calendar-days" class="w-10 h-10 mx-auto mb-8" style="color: var(--secondary-color)"></i>
-                    <h3 class="text-2xl font-bold text-primary mb-3">מתי?</h3>
-                    <p id="info-date" class="text-gray-600 font-medium">...</p>
+                    <h3 id="info-headline-1" class="text-2xl font-bold text-primary mb-3">...</h3>
+                    <p id="info-text-1" class="text-gray-600 font-medium">...</p>
                 </div>
                 <div class="glass-card p-12 rounded-[40px] text-center">
                     <i data-lucide="video" class="w-10 h-10 mx-auto mb-8" style="color: var(--secondary-color)"></i>
-                    <h3 class="text-2xl font-bold text-primary mb-3">איפה?</h3>
-                    <p class="text-gray-600 font-medium">בזום מהבית שלך</p>
+                    <h3 id="info-headline-2" class="text-2xl font-bold text-primary mb-3">...</h3>
+                    <p id="info-text-2" class="text-gray-600 font-medium">...</p>
                 </div>
                 <div class="glass-card p-12 rounded-[40px] text-center">
                     <i data-lucide="clapperboard" class="w-10 h-10 mx-auto mb-8" style="color: var(--secondary-color)"></i>
-                    <h3 class="text-2xl font-bold text-primary mb-3">לא פנויה?</h3>
-                    <p class="text-gray-600 font-medium">ההקלטה תישלח אלייך</p>
+                    <h3 id="info-headline-3" class="text-2xl font-bold text-primary mb-3">...</h3>
+                    <p id="info-text-3" class="text-gray-600 font-medium">...</p>
                 </div>
             </div>
         </section>
 
         <section class="py-24 px-6 bg-[#FDFBF7]">
+            <div class="max-w-4xl mx-auto">
+                <h2 id="solution-headline" class="text-4xl font-black text-right mb-12 text-primary border-r-8 border-accent pr-6">...</h2>
+                
+                <div id="solution-text" class="text-xlleading-relaxed text-gray-700 space-y-5 font-light">
+                    ...
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 px-6 bg-white">
             <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-16">
                 <div class="w-72 h-72 md:w-96 md:h-96 rounded-full border-[12px] border-white shadow-2xl overflow-hidden shrink-0">
                     <img src="https://raw.githubusercontent.com/rivkaol/quiet-gut/main/profile.jpg.jpg" class="w-full h-full object-cover">
                 </div>
                 <div class="text-center md:text-right">
-                    <h2 class="text-4xl font-black text-primary mb-8 underline decoration-accent/30 underline-offset-8">מילה אישית ממני</h2>
-                    <p class="text-2xl text-gray-700 leading-relaxed font-light italic">
-                        "הגוף שלנו הוא המרפא הטוב ביותר של עצמו - כשנותנים לו את התנאים הנכונים, גם בגוף וגם בנפש. בואי לגלות איך עושים את זה נכון, פשוט ובריא."
+                    <h2 id="personal-headline" class="text-4xl font-black text-primary mb-8">...</h2>
+                    <p id="personal-text" class="text-2xl text-gray-700 leading-relaxed font-light italic">
+                        ...
                     </p>
                     <p class="text-2xl font-bold mt-8 text-primary">שלך, רבקה הולצברג</p>
                 </div>
@@ -157,14 +165,29 @@
 
         <section class="py-24 bg-primary text-white">
             <div class="max-w-2xl mx-auto px-6 text-center">
-                <h2 class="text-4xl md:text-7xl font-black text-white mb-16">הגיע הזמן שלך</h2>
-                <div class="bg-white rounded-[50px] p-10 md:p-16 text-right shadow-2xl">
-                    <form class="dynamic-form space-y-6" onsubmit="processForm(event)">
+                <h2 id="final-headline" class="text-4xl md:text-7xl font-black text-white mb-8">...</h2>
+                <p id="final-subtitle" class="text-xl md:text-2xl text-white/80 mb-16 font-light">...</p>
+                
+                <div class="bg-white rounded-[40px] p-10 md:p-12 text-right shadow-2xl">
+                    <h3 id="form-title-2" class="text-3xl font-bold text-center mb-10 text-primary">...</h3>
+                    
+                    <form class="dynamic-form space-y-5" onsubmit="processForm(event)">
                         <div class="hp-field"><input type="text" name="hp_confirm"></div>
-                        <input type="text" name="fullName" class="custom-input w-full px-6 py-5 rounded-2xl text-gray-800" placeholder="שם מלא" required>
-                        <input type="email" name="email" class="custom-input w-full px-6 py-5 rounded-2xl text-gray-800 text-left" dir="ltr" placeholder="אימייל" required>
-                        <input type="tel" name="phone" class="custom-input w-full px-6 py-5 rounded-2xl text-gray-800 text-left" dir="ltr" placeholder="טלפון" required>
-                        <button type="submit" class="btn-premium w-full py-6 text-white font-black rounded-2xl text-2xl mt-8">הרשמה ותשלום מאובטח</button>
+                        
+                        <div class="space-y-1.5">
+                            <label class="block text-base font-medium text-primary pr-1">שם מלא<span class="required-star">*</span></label>
+                            <input type="text" name="fullName" class="custom-input w-full rounded-xl text-gray-800" placeholder="ישראל ישראלי" required>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-base font-medium text-primary pr-1">אימייל<span class="required-star">*</span></label>
+                            <input type="email" name="email" class="custom-input w-full rounded-xl text-gray-800 text-left" dir="ltr" placeholder="your@email.com" required>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-base font-medium text-primary pr-1">טלפון<span class="required-star">*</span></label>
+                            <input type="tel" name="phone" class="custom-input w-full rounded-xl text-gray-800 text-left" dir="ltr" placeholder="050-1234567" required>
+                        </div>
+                        
+                        <button id="submit-btn-2" type="submit" class="btn-premium w-full py-5 text-white font-black rounded-xl text-2xl mt-8">...</button>
                     </form>
                 </div>
             </div>
@@ -188,10 +211,36 @@
                 const response = await fetch(`${SCRIPT_URL}?id=${id}`);
                 cachedData = await response.json();
                 
+                // הזרקת טקסטים דינמית לכל ה-IDs החדשים
                 document.getElementById('page-title').innerText = cachedData.name + " | רבקה הולצברג";
-                document.getElementById('training-name').innerText = cachedData.name;
-                document.getElementById('training-date-hero').innerText = cachedData.date;
-                document.getElementById('info-date').innerText = cachedData.date;
+                document.getElementById('tagline-text').innerText = cachedData.tagline;
+                document.getElementById('hero-headline').innerText = cachedData.heroHeadline;
+                document.getElementById('hero-subtitle').innerText = cachedData.heroSubtitle;
+                
+                // טקסטים לטפסים
+                document.getElementById('form-title-1').innerText = cachedData.formHeadline;
+                document.getElementById('form-title-2').innerText = cachedData.formHeadline;
+                document.getElementById('submit-btn-1').innerText = cachedData.buttonText;
+                document.getElementById('submit-btn-2').innerText = cachedData.buttonText;
+                
+                // שלוש תיבות המידע
+                document.getElementById('info-headline-1').innerText = cachedData.infoHeadline1;
+                document.getElementById('info-text-1').innerText = cachedData.date; // משתמש בתאריך המקורי
+                document.getElementById('info-headline-2').innerText = cachedData.infoHeadline2;
+                document.getElementById('info-text-2').innerText = cachedData.infoText2;
+                document.getElementById('info-headline-3').innerText = cachedData.infoHeadline3;
+                document.getElementById('info-text-3').innerText = cachedData.infoText3;
+                
+                // סעיפי מה נלמד והמסר האישי
+                document.getElementById('solution-headline').innerText = cachedData.solutionHeadline;
+                document.getElementById('solution-text').innerHTML = cachedData.solutionText; // תומך ב-HTML מרשימות בשיטס
+                document.getElementById('personal-headline').innerText = cachedData.personalHeadline;
+                document.getElementById('personal-text').innerText = cachedData.personalText;
+                
+                // חלק סיום CTA
+                document.getElementById('final-headline').innerText = cachedData.finalHeadline;
+                document.getElementById('final-subtitle').innerText = cachedData.finalSubtitle;
+
                 if(cachedData.color) document.documentElement.style.setProperty('--secondary-color', cachedData.color);
 
                 document.body.classList.add('is-loaded');
@@ -215,8 +264,8 @@
                 if (f === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) isValid = false;
                 if (f === 'phone' && (val.length < 7 || !/^[\d\+\-\s]+$/.test(val))) isValid = false;
 
-                if (!isValid) { input.classList.add('error'); ok = false; }
-                else input.classList.remove('error');
+                if (!isValid) { input.parentElement.classList.add('error'); input.classList.add('error'); ok = false; }
+                else { input.parentElement.classList.remove('error'); input.classList.remove('error'); }
             });
             return ok;
         }
